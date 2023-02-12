@@ -4,29 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="645fcffc-0454-4652-9ad8-0c7bfb4fe5f1" name="变更" comment="完成雷达数据来源编写">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ocean/app/dwd/BaseRealTimeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ocean/app/dwd/BaseRealTimeData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ocean/app/ods/BaseOdsDataProcess.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ocean/bean/ElectroMagneticBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ocean/bean/ElectroMagneticBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ocean/bean/PhotoElectricBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ocean/bean/PhotoElectricBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ocean/bean/RadarBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ocean/bean/RadarBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ocean/function/ElectroMagneticDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ocean/function/ElectroMagneticDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ocean/function/PhotoElectricDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ocean/function/PhotoElectricDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ocean/function/RadarDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ocean/function/RadarDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ocean/utils/CkFileUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ocean/utils/CkFileUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ocean/utils/DateFormatUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ocean/utils/DateFormatUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ocean/utils/KafkaUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ocean/utils/KafkaUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/log4j.properties" beforeDir="false" />
-    </list>
+    <list default="true" id="645fcffc-0454-4652-9ad8-0c7bfb4fe5f1" name="变更" comment="完成雷达UDP数据接入kafka" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -185,7 +163,7 @@
       <workItem from="1675661941547" duration="1197000" />
       <workItem from="1675677318900" duration="681000" />
       <workItem from="1675684003577" duration="29000" />
-      <workItem from="1676108290593" duration="4833000" />
+      <workItem from="1676108290593" duration="4967000" />
     </task>
     <task id="LOCAL-00001" summary="完成雷达数据来源编写">
       <created>1673078872194</created>
@@ -194,7 +172,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673078872194</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="完成雷达UDP数据接入kafka">
+      <created>1676113854066</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1676113854066</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -214,7 +199,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="完成低小慢实时推送" />
     <MESSAGE value="完成雷达数据来源编写" />
-    <option name="LAST_COMMIT_MESSAGE" value="完成雷达数据来源编写" />
+    <MESSAGE value="完成雷达UDP数据接入kafka" />
+    <option name="LAST_COMMIT_MESSAGE" value="完成雷达UDP数据接入kafka" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
