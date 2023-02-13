@@ -25,6 +25,9 @@
             <configuration>
               <transformers>
                 <transformer>
+                  <mainClass>com.ocean.app.ods.UdpToKafka</mainClass>
+                </transformer>
+                <transformer>
                   <resource>reference.conf</resource>
                 </transformer>
               </transformers>

@@ -1,5 +1,12 @@
 package com.ocean.utils;
 
+import org.apache.flink.table.planner.expressions.In;
+
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
@@ -9,12 +16,13 @@ import java.util.Date;
 /**
  * @author 徐正洲
  * @create 2022-10-31 16:56
- *
+ * <p>
  * 时间工具类
  */
 public class DateFormatUtil {
     private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static final DateTimeFormatter dtfFull = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     public static Long toTs(String dtStr, boolean isFull) {
 
@@ -43,7 +51,30 @@ public class DateFormatUtil {
         return dtfFull.format(localDateTime);
     }
 
-    public static void main(String[] args) {
-        System.out.println(toTs("2022-10-19 17:09:57",true));
+    public static Long getTs(String ts) throws ParseException {
+        //距离今天0点的时间戳
+//        Long currentDayTs = Long.parseLong(ts);
+//        Long currentDayMs =currentDayTs /10L;
+//
+//        //今天日期的时间戳
+//        LocalDate now = LocalDate.now();
+//        Date date = sdf.parse(now.toString());
+//        long time = date.getTime();
+//
+//        Long rsTs = currentDayMs + time;
+        return System.currentTimeMillis();
+    }
+
+    public static void main(String[] args) throws ParseException {
+        System.out.println(toTs("2022-10-19 17:09:57", true));
+
+        LocalDate now = LocalDate.now();
+        Date date = sdf.parse(now.toString());
+        long time = date.getTime();
+
+        long l = time + 733038018l;
+        System.out.println(l);
+
+
     }
 }
