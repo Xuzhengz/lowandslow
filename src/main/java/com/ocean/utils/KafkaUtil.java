@@ -22,7 +22,7 @@ import java.util.Properties;
  * kakfa工具类
  */
 public class KafkaUtil {
-    private static String KAFKA_SERVER = "172.16.11.151:9092";
+    private static String KAFKA_SERVER = "192.168.6.50:9092";
     private static String KAFKA_ISOLATION_LEVEL = "read_committed";
 
     public static FlinkKafkaConsumer<String> getFlinkKafkaConsumer(String topic, String groupId) {

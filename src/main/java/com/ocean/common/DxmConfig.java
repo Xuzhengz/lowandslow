@@ -9,7 +9,7 @@ public class DxmConfig {
     public static final String MYSQL_DRIVER = "com.mysql.jdbc.Driver";
 
     // Mysql 连接 URL
-    public static final String MYSQL_URL = "jdbc:mysql://172.16.8.200:30001/people?useUnicode=true&characterEncoding=utf-8&useSSL=false";
+    public static final String MYSQL_URL = "jdbc:mysql://192.168.6.50:3306/dxm?useUnicode=true&characterEncoding=utf-8&useSSL=false";
 
     // Mysql 账号
     public static final String MYSQL_USERNAME = "root";
