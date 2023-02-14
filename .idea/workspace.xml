@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="645fcffc-0454-4652-9ad8-0c7bfb4fe5f1" name="变更" comment="完成配置优化，增强写入mysql的并发能力。">
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ocean/app/ods/RadarToMysql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ocean/app/ods/RadarToMysql.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ocean/app/ods/UdpToKafka.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ocean/app/ods/UdpToKafka.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ocean/utils/KafkaUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ocean/utils/KafkaUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,7 +146,7 @@
       <workItem from="1676338906604" duration="5795000" />
       <workItem from="1676359391080" duration="4350000" />
       <workItem from="1676364378814" duration="156000" />
-      <workItem from="1676367038631" duration="1371000" />
+      <workItem from="1676367038631" duration="1975000" />
     </task>
     <task id="LOCAL-00001" summary="完成雷达数据来源编写">
       <created>1673078872194</created>
@@ -179,7 +176,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676364000424</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="完成配置优化，增强写入mysql的并发能力。">
+      <created>1676368430381</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1676368430381</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,7 +200,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/master" />
+                        <option value="master" />
                       </list>
                     </value>
                   </entry>
