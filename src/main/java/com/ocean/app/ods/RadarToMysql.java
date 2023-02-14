@@ -1,5 +1,6 @@
 package com.ocean.app.ods;
 
+import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import com.ocean.bean.RadarBean;
 import com.ocean.utils.KafkaUtil;
@@ -23,14 +24,13 @@ public class RadarToMysql {
             env.setParallelism(1);
 
             String topic = "radar";
-            String groupId = "radars";
+            String groupId = "radar_consumers";
             DataStreamSource<String> radarDs = env.addSource(KafkaUtil.getFlinkKafkaConsumer(topic, groupId));
 
             SingleOutputStreamOperator<RadarBean> radarObj = radarDs.flatMap(new FlatMapFunction<String, RadarBean>() {
                 @Override
                 public void flatMap(String s, Collector<RadarBean> collector) throws Exception {
-                    Gson gson = new Gson();
-                    RadarBean radarBean = gson.fromJson(s, RadarBean.class);
+                    RadarBean radarBean = JSONObject.parseObject(s, RadarBean.class);
                     collector.collect(radarBean);
                 }
             });
