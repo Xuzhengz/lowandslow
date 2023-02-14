@@ -30,8 +30,13 @@ public class RadarToMysql {
             SingleOutputStreamOperator<RadarBean> radarObj = radarDs.flatMap(new FlatMapFunction<String, RadarBean>() {
                 @Override
                 public void flatMap(String s, Collector<RadarBean> collector) throws Exception {
-                    RadarBean radarBean = JSONObject.parseObject(s, RadarBean.class);
-                    collector.collect(radarBean);
+                    try {
+                        RadarBean radarBean = JSONObject.parseObject(s, RadarBean.class);
+                        collector.collect(radarBean);
+                    } catch (Exception e) {
+                        System.out.println("radarObj算子转换bean异常：-->" + s + "\n" + "异常信息-->" + e.getMessage());
+                    }
+
                 }
             });
 

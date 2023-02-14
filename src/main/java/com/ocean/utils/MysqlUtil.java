@@ -10,7 +10,6 @@ import org.apache.flink.streaming.api.functions.sink.SinkFunction;
 
 import java.lang.reflect.Field;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 /**
  * @author 徐正洲
@@ -23,7 +22,7 @@ public class MysqlUtil {
                 new JdbcStatementBuilder<T>() {
                     @SneakyThrows
                     @Override
-                    public void accept(PreparedStatement preparedStatement, T t) throws SQLException {
+                    public void accept(PreparedStatement preparedStatement, T t) {
                         Class<?> tClass = t.getClass();
                         Field[] declaredFields = tClass.getDeclaredFields();
                         //定义偏移量
@@ -38,8 +37,6 @@ public class MysqlUtil {
                     }
                 },
                 JdbcExecutionOptions.builder()
-                        .withBatchSize(5)
-                        .withBatchIntervalMs(1000L)
                         .build(),
                 new JdbcConnectionOptions.JdbcConnectionOptionsBuilder()
                         .withDriverName(DxmConfig.MYSQL_DRIVER)
