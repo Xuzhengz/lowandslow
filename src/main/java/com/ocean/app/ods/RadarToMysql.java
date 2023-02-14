@@ -21,7 +21,7 @@ public class RadarToMysql {
     public static void main(String[] args) {
         try {
             StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
-            env.setParallelism(1);
+            env.setParallelism(2);
 
             String topic = "radar";
             String groupId = "radar_consumers";
