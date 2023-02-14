@@ -1,15 +1,10 @@
 package com.ocean.app.ods;
 
 import com.alibaba.fastjson.JSONObject;
-import com.google.gson.Gson;
-import com.ocean.bean.RadarBean;
-import com.ocean.bean.TargetType;
 import com.ocean.function.RadarDataSource;
 import com.ocean.function.TargetDataSource;
 import com.ocean.utils.BaseSystemUtil;
-import com.ocean.utils.DateFormatUtil;
 import com.ocean.utils.KafkaUtil;
-import com.ocean.utils.MysqlUtil;
 import org.apache.flink.api.common.eventtime.SerializableTimestampAssigner;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.functions.FlatMapFunction;
@@ -17,12 +12,9 @@ import org.apache.flink.api.java.functions.KeySelector;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import org.apache.flink.streaming.api.functions.ProcessFunction;
 import org.apache.flink.streaming.api.functions.co.ProcessJoinFunction;
 import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.util.Collector;
-import org.apache.hadoop.yarn.webapp.hamlet2.Hamlet;
-import org.junit.Test;
 
 import java.time.Duration;
 
@@ -50,12 +42,13 @@ public class UdpToKafka {
             //TODO 2、雷达与目标类型报文十六进制转十进制（时戳：从今天0点开始算，截至到今天24点）封装成bean
             SingleOutputStreamOperator<JSONObject> radarTransDs = radarDs.flatMap(new FlatMapFunction<String, JSONObject>() {
                 @Override
-                public void flatMap(String data, Collector<JSONObject> collector) throws Exception {
+                public void flatMap(String data, Collector<JSONObject> collector) {
                     JSONObject radarJson = new JSONObject();
                     radarJson.put("msgId", BaseSystemUtil.baseSystemTransfer(data.substring(0, 4)));
                     radarJson.put("msgLength", BaseSystemUtil.baseSystemTransfer(data.substring(4, 8)));
                     radarJson.put("msgFrameNum", BaseSystemUtil.baseSystemTransfer(data.substring(8, 16)));
-                    radarJson.put("ts", DateFormatUtil.getTs(BaseSystemUtil.baseSystemTransfer(data.substring(16, 24))));
+//                    radarJson.put("ts", DateFormatUtil.getTs(BaseSystemUtil.baseSystemTransfer(data.substring(16, 24))));
+                    radarJson.put("ts", System.currentTimeMillis());
                     radarJson.put("targetType", "4");
                     radarJson.put("dataPeriod", BaseSystemUtil.baseSystemTransfer(data.substring(32, 36)));
                     radarJson.put("targetEcho", BaseSystemUtil.baseSystemTransfer(data.substring(36, 40)));
@@ -103,7 +96,7 @@ public class UdpToKafka {
                         targetJson.put("ts", fields[4]);
                         collector.collect(targetJson);
                     } catch (Exception e) {
-                        System.out.println("targetType异常：--->" + e.getMessage());
+                        System.out.println("targetTypeDs算子异常：--->" + e.getMessage());
                     }
                 }
             }).assignTimestampsAndWatermarks(WatermarkStrategy.<JSONObject>forBoundedOutOfOrderness(Duration.ofSeconds(0)).withTimestampAssigner(new SerializableTimestampAssigner<JSONObject>() {
@@ -126,16 +119,21 @@ public class UdpToKafka {
                         public String getKey(JSONObject jsonObject) throws Exception {
                             return jsonObject.getString("targetBatchNum");
                         }
-                    })).between(Time.seconds(-10), Time.seconds(10))
+                    })).between(Time.seconds(-2), Time.seconds(2))
                     .process(new ProcessJoinFunction<JSONObject, JSONObject, String>() {
                         @Override
-                        public void processElement(JSONObject jsonObject, JSONObject jsonObject2, ProcessJoinFunction<JSONObject, JSONObject, String>.Context context, Collector<String> collector) throws Exception {
+                        public void processElement(JSONObject jsonObject, JSONObject jsonObject2, ProcessJoinFunction<JSONObject, JSONObject, String>.Context context, Collector<String> collector) {
                             String targetBatchNum = jsonObject.getString("targetBatchNum");
                             String targetBatchNum2 = jsonObject2.getString("targetBatchNum");
 
                             if (targetBatchNum.equals(targetBatchNum2)){
-                                jsonObject.put("targetType",jsonObject2.getString("targetType"));
-                                collector.collect(jsonObject.toJSONString());
+                                try {
+                                    jsonObject.put("targetType",jsonObject2.getString("targetType"));
+                                    collector.collect(jsonObject.toJSONString());
+                                }catch (Exception e){
+                                    System.out.println("unionDS算子异常-->" + e.getMessage());
+                                }
+
                             }
                         }
                     });
@@ -149,6 +147,7 @@ public class UdpToKafka {
             unionDS.addSink(KafkaUtil.getFlinkKafkaProducer(radar_topic));
 
 
+            //TODO 5、启动
             env.execute();
         } catch (Exception e) {
             System.out.println("异常捕获--->" + e.getMessage());

@@ -1,5 +1,6 @@
 package com.ocean.utils;
 
+import com.ocean.common.DxmConfig;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.api.common.typeinfo.BasicTypeInfo;
 import org.apache.flink.api.common.typeinfo.TypeInformation;
@@ -22,12 +23,9 @@ import java.util.Properties;
  * kakfa工具类
  */
 public class KafkaUtil {
-    private static String KAFKA_SERVER = "192.168.6.50:9092";
-    private static String KAFKA_ISOLATION_LEVEL = "read_committed";
-
     public static FlinkKafkaConsumer<String> getFlinkKafkaConsumer(String topic, String groupId) {
         Properties properties = new Properties();
-        properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaUtil.KAFKA_SERVER);
+        properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, DxmConfig.KAFKA_SERVER);
         properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, groupId);
         return new FlinkKafkaConsumer<String>(
                 topic,
@@ -57,13 +55,13 @@ public class KafkaUtil {
 
 
     public static FlinkKafkaProducer getFlinkKafkaProducer(String topic) {
-        return new FlinkKafkaProducer(KAFKA_SERVER, topic, new SimpleStringSchema());
+        return new FlinkKafkaProducer(DxmConfig.KAFKA_SERVER, topic, new SimpleStringSchema());
     }
 
     public static FlinkKafkaProducer<String> getFlinkKafka2PcProducer(String topic) {
         Properties properties = new Properties();
-        properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KAFKA_SERVER);
-        properties.setProperty(ConsumerConfig.ISOLATION_LEVEL_CONFIG, KAFKA_ISOLATION_LEVEL);
+        properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, DxmConfig.KAFKA_SERVER);
+        properties.setProperty(ConsumerConfig.ISOLATION_LEVEL_CONFIG, DxmConfig.KAFKA_ISOLATION_LEVEL);
         return new FlinkKafkaProducer<String>(
                 topic,
                 new KafkaSerializationSchema<String>() {
@@ -89,7 +87,7 @@ public class KafkaUtil {
 
         return " with ('connector' = 'kafka', " +
                 " 'topic' = '" + topic + "'," +
-                " 'properties.bootstrap.servers' = '" + KAFKA_SERVER + "', " +
+                " 'properties.bootstrap.servers' = '" + DxmConfig.KAFKA_SERVER + "', " +
                 " 'properties.group.id' = '" + groupId + "', " +
                 " 'format' = 'json', " +
                 " 'scan.startup.mode' = 'group-offsets')";
@@ -105,7 +103,7 @@ public class KafkaUtil {
         return "WITH ( " +
                 "  'connector' = 'kafka', " +
                 "  'topic' = '" + topic + "', " +
-                "  'properties.bootstrap.servers' = '" + KAFKA_SERVER + "', " +
+                "  'properties.bootstrap.servers' = '" + DxmConfig.KAFKA_SERVER + "', " +
                 "  'format' = 'json' " +
                 ")";
     }
@@ -133,7 +131,7 @@ public class KafkaUtil {
         return "WITH ( " +
                 "  'connector' = 'upsert-kafka', " +
                 "  'topic' = '" + topic + "', " +
-                "  'properties.bootstrap.servers' = '" + KAFKA_SERVER + "', " +
+                "  'properties.bootstrap.servers' = '" + DxmConfig.KAFKA_SERVER + "', " +
                 "  'key.format' = 'json', " +
                 "  'value.format' = 'json' " +
                 ")";

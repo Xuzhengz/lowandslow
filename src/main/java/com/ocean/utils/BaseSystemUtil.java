@@ -1,11 +1,5 @@
 package com.ocean.utils;
 
-import org.apache.flink.table.planner.expressions.In;
-
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-
-
 /**
  * @author 徐正洲
  * @create 2023-02-13 10:33
@@ -29,9 +23,7 @@ public class BaseSystemUtil {
             data = s4 + s3 + s2 + s1;              // 000006e2
         }
 
-        String msg = String.valueOf(Long.parseLong(data, 16));
-
-        return msg;
+        return String.valueOf(Long.parseLong(data, 16));
     }
 
 

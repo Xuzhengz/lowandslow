@@ -1,7 +1,5 @@
 package com.ocean.bean;
 
-import cn.hutool.core.lang.Snowflake;
-import cn.hutool.core.util.IdUtil;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
