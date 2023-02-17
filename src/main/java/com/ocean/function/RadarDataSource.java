@@ -6,10 +6,6 @@ import org.apache.flink.streaming.api.functions.source.RichSourceFunction;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.SocketException;
-import java.nio.Buffer;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 
 /**
  * @author 徐正洲
@@ -46,12 +42,15 @@ public class RadarDataSource extends RichSourceFunction<String> {
 
             //雷达报文数据转成十六进制
             String data = BaseSystemUtil.bytesToHexString(byteData, length);
+
+
             if (data.startsWith("c6c6")) {
                 //输出雷达报文
                 sourceContext.collect(data);
             }
         }
     }
+
 
     @Override
     public void cancel() {

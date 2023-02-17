@@ -21,10 +21,10 @@ public class RadarToMysql {
     public static void main(String[] args) {
         try {
             StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
-            env.setParallelism(2);
+            env.setParallelism(3);
 
             String topic = "radar";
-            String groupId = "radar_consumers";
+            String groupId = "mysql";
             DataStreamSource<String> radarDs = env.addSource(KafkaUtil.getFlinkKafkaConsumer(topic, groupId));
 
             SingleOutputStreamOperator<RadarBean> radarObj = radarDs.flatMap(new FlatMapFunction<String, RadarBean>() {
@@ -41,7 +41,7 @@ public class RadarToMysql {
             });
 
             //TODO 雷达数据写入mysql
-            radarObj.addSink(MysqlUtil.getMysqlSink("insert into radar values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"));
+            radarObj.addSink(MysqlUtil.getMysqlSink("insert into radar values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"));
             env.execute();
         } catch (Exception e) {
             System.out.println("异常捕获--->" + e.getMessage());

@@ -37,6 +37,8 @@ public class MysqlUtil {
                     }
                 },
                 JdbcExecutionOptions.builder()
+                        .withBatchSize(DxmConfig.MYSQL_BATCH_SIZE)
+                        .withBatchIntervalMs(DxmConfig.MYSQL_BATCH_interval_MS)
                         .build(),
                 new JdbcConnectionOptions.JdbcConnectionOptionsBuilder()
                         .withDriverName(DxmConfig.MYSQL_DRIVER)

@@ -70,4 +70,6 @@ public class RadarBean {
     private String targetBatchNum;
     //跟踪报文状态
     private String messageStatus;
+    //同批号标识，用于航迹状态追溯
+    private String remark;
 }

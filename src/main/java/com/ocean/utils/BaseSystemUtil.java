@@ -6,24 +6,18 @@ package com.ocean.utils;
  */
 public class BaseSystemUtil {
     //大小端转换，十六进制转换成十进制
-    public static String baseSystemTransfer(String message) {
-        String data = null;
+    public static int baseSystemTransfer(String message) {
         //如果字符串长度为4，两两转换
         if (message.length() == 4) {
-            String s1 = message.substring(0, 2);
-            String s2 = message.substring(2, 4);
-            data = s2 + s1;
+            return ByteConvertUtil.parse(message, ByteConvertUtil.SHORT);
         }
         //如果字符串长度为8，每4个为一组，组内两两转换后，组与组之间互换
         if (message.length() == 8) {
-            String s1 = message.substring(0, 2);   // e2
-            String s2 = message.substring(2, 4);   // 06
-            String s3 = message.substring(4, 6);   // 00
-            String s4 = message.substring(6, 8);   // 00
-            data = s4 + s3 + s2 + s1;              // 000006e2
+            return ByteConvertUtil.parse(message, ByteConvertUtil.INT);
         }
 
-        return String.valueOf(Long.parseLong(data, 16));
+        return 0;
+
     }
 
 

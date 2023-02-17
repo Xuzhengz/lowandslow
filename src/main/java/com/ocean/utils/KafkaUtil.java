@@ -27,7 +27,9 @@ public class KafkaUtil {
         Properties properties = new Properties();
         properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, DxmConfig.KAFKA_SERVER);
         properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, groupId);
-        properties.setProperty(ConsumerConfig.MAX_POLL_RECORDS_CONFIG,"1000");
+        properties.setProperty(ConsumerConfig.MAX_POLL_RECORDS_CONFIG,"1000");     // 1000条
+        properties.setProperty(ConsumerConfig.FETCH_MAX_BYTES_CONFIG,"104857600"); // 100m
+
         return new FlinkKafkaConsumer<String>(
                 topic,
                 new KafkaDeserializationSchema<String>() {
